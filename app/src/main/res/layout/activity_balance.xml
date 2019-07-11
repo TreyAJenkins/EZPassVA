@@ -1,214 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/swiperefresh"
+    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BalanceActivity"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="#eeeeee"
+    tools:context=".BalanceActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/AppTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--app:titleTextColor="@color/primary_title_text"-->
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            style="@style/AppTheme"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            app:layout_constraintTop_toTopOf="parent"
-            app:titleTextColor="@color/primary_title_text" />
+            android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-            <androidx.cardview.widget.CardView
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardBackgroundColor="@android:color/darker_gray"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="0dp"
-                app:contentPadding="0dp">
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/balanceView"
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="$0.00"
-                    android:textAlignment="center"
-                    android:textSize="96sp" />
-            </androidx.cardview.widget.CardView>
+                    app:cardBackgroundColor="@android:color/darker_gray"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0dp"
+                    app:contentPadding="0dp">
 
-        </LinearLayout>
+                    <TextView
+                        android:id="@+id/balanceView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="$0.00"
+                        android:textAlignment="center"
+                        android:textSize="96sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+                </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/UsernameCard"
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:cardBackgroundColor="@android:color/darker_gray"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="0dp"
-                app:contentPadding="0dp">
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-                <LinearLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/UsernameCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@android:color/darker_gray"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0dp"
+                    app:contentPadding="0dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/Username"
-                        android:textAlignment="center"
-                        android:textSize="40sp"
-                        android:textStyle="bold" />
+                        android:orientation="vertical">
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="4dp"
-                        android:layout_weight="1"
-                        android:background="?android:attr/listDivider" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/Username"
+                            android:textAlignment="center"
+                            android:textSize="40sp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/usernameView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="--"
-                        android:textAlignment="center"
-                        android:textSize="30sp" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="4dp"
+                            android:layout_weight="1"
+                            android:background="?android:attr/listDivider" />
 
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/usernameView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="--"
+                            android:textAlignment="center"
+                            android:textSize="30sp" />
 
-            </androidx.cardview.widget.CardView>
+                    </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/AccountNameCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@android:color/darker_gray"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="0dp"
-                app:contentPadding="0dp">
-
-                <LinearLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/AccountNameCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@android:color/darker_gray"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0dp"
+                    app:contentPadding="0dp">
 
-                    <TextView
-                        android:id="@+id/textView4"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/AccountName"
-                        android:textAlignment="center"
-                        android:textSize="40sp"
-                        android:textStyle="bold" />
+                        android:orientation="vertical">
 
-                    <View
-                        android:id="@+id/divider2"
-                        android:layout_width="match_parent"
-                        android:layout_height="4dp"
-                        android:layout_weight="1"
-                        android:background="?android:attr/listDivider" />
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/AccountName"
+                            android:textAlignment="center"
+                            android:textSize="40sp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/nameView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="--"
-                        android:textAlignment="center"
-                        android:textSize="30sp" />
+                        <View
+                            android:id="@+id/divider2"
+                            android:layout_width="match_parent"
+                            android:layout_height="4dp"
+                            android:layout_weight="1"
+                            android:background="?android:attr/listDivider" />
 
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/nameView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="--"
+                            android:textAlignment="center"
+                            android:textSize="30sp" />
 
-            </androidx.cardview.widget.CardView>
+                    </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/AccountStatusCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@android:color/darker_gray"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="0dp"
-                app:contentPadding="0dp">
-
-                <LinearLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/AccountStatusCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@android:color/darker_gray"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0dp"
+                    app:contentPadding="0dp"
+                    tools:visibility="gone">
 
-                    <TextView
-                        android:id="@+id/textView5"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/AccountStatus"
-                        android:textAlignment="center"
-                        android:textSize="40sp"
-                        android:textStyle="bold" />
+                        android:orientation="vertical">
 
-                    <View
-                        android:id="@+id/divider4"
-                        android:layout_width="match_parent"
-                        android:layout_height="4dp"
-                        android:layout_weight="1"
-                        android:background="?android:attr/listDivider" />
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/AccountStatus"
+                            android:textAlignment="center"
+                            android:textSize="40sp"
+                            android:textStyle="bold"
+                            android:visibility="gone"
+                            tools:visibility="gone" />
 
-                    <TextView
-                        android:id="@+id/statusView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="--"
-                        android:textAlignment="center"
-                        android:textSize="30sp" />
+                        <View
+                            android:id="@+id/divider4"
+                            android:layout_width="match_parent"
+                            android:layout_height="4dp"
+                            android:layout_weight="1"
+                            android:background="?android:attr/listDivider"
+                            android:visibility="gone"
+                            tools:visibility="gone" />
 
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/statusView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textAlignment="center"
+                            android:textSize="30sp"
+                            android:visibility="visible"
+                            tools:visibility="visible" />
 
-        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="395dp"
+                android:layout_height="497dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</LinearLayout>

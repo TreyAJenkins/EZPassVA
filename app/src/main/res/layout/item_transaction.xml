@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="4dp"
+        app:contentPadding="4dp"
+        android:background="#e0e0e0"
+
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/titleTransaction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Title Content ---- Title Content"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/elapsedLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:id="@+id/elapsedTimeTransaction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:text="45 MIN"
+                    android:textAlignment="center"
+                    android:textSize="36sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/layoutEntry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/elapsedTimeTransaction">
+
+                    <TextView
+                        android:id="@+id/entryDateTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="12/31/1999 12:00 PM" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/layoutExit"
+                    app:layout_constraintStart_toEndOf="@+id/layoutEntry"
+                    app:layout_constraintTop_toBottomOf="@+id/elapsedTimeTransaction">
+
+                    <TextView
+                        android:id="@+id/textView19"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="->"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutExit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/elapsedTimeTransaction">
+
+                    <TextView
+                        android:id="@+id/exitDateTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="12/31/1999 12:00 PM"
+                        android:textAlignment="textEnd" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <TextView
+                android:id="@+id/bodyTransaction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Card body content"
+                android:textColor="#555"
+                android:textSize="16sp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <org.fabiomsr.moneytextview.MoneyTextView
+                    android:id="@+id/transactionTollPaid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:amount="1256.56"
+                    app:baseTextColor="#B00020"
+                    app:baseTextSize="18sp"
+                    app:decimalDigitsTextSize="14sp"
+                    app:decimalMargin="2dp"
+                    app:includeDecimalSeparator="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:symbol="$"
+                    app:symbolGravity="start"
+                    app:symbolMargin="2dp"
+                    app:symbolTextSize="18sp" />
+
+                <TextView
+                    android:id="@+id/transactionDatePosted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="12/31/1999"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/transactionBalance"
+                    app:layout_constraintStart_toEndOf="@+id/transactionTollPaid"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <org.fabiomsr.moneytextview.MoneyTextView
+                    android:id="@+id/transactionBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:amount="1256.56"
+                    app:baseTextColor="#555"
+                    app:baseTextSize="18sp"
+                    app:decimalDigitsTextSize="14sp"
+                    app:decimalMargin="2dp"
+                    app:gravity="right"
+                    app:includeDecimalSeparator="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:symbol="$"
+                    app:symbolGravity="start"
+                    app:symbolMargin="2dp"
+                    app:symbolTextSize="18sp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

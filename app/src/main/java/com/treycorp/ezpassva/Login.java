@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.chuckerteam.chucker.api.ChuckerInterceptor;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,6 +39,9 @@ public class Login extends AppCompatActivity {
 
     ProgressDialog dialog;
 
+    LocalPlugin localPlugin = new LocalPlugin();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +50,18 @@ public class Login extends AppCompatActivity {
         usernameBox = (EditText) findViewById(R.id.username);
         passwordBox = (EditText) findViewById(R.id.password);
 
-        getSupportActionBar().setTitle(getString(R.string.LoginTitle));
+        localPlugin.init(Login.this);
+
+        //getSupportActionBar().setTitle(getString(R.string.LoginTitle));
+
+        if (localPlugin.loginAvailable()) {
+            //Toast.makeText(Login.this, localPlugin.getUsername() + ":" + localPlugin.getPassword(), Toast.LENGTH_LONG).show();
+            username = localPlugin.getUsername();
+            password = localPlugin.getPassword();
+            usernameBox.setText(username);
+            passwordBox.setText(password);
+            startLogin();
+        }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -62,7 +78,12 @@ public class Login extends AppCompatActivity {
         dialog = ProgressDialog.show(Login.this, "Logging in...",
                 "Please wait...", true);
 
-        OkHttpClient client = new OkHttpClient();
+
+        OkHttpClient.Builder clientBuilder = new OkHttpClient().newBuilder();
+        if (localPlugin.getBoolean("Chuck Enabled")) {
+            clientBuilder = clientBuilder.addInterceptor(new ChuckerInterceptor(this));
+        }
+        OkHttpClient client = clientBuilder.build();
 
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -70,14 +91,21 @@ public class Login extends AppCompatActivity {
                 .addFormDataPart("password", password)
                 .build();
 
+
         Request request = new Request.Builder().url(getString(R.string.AccountURL)).post(requestBody).build();
+        Log.d("HTTP", "Request built");
 
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
                 dialog.dismiss();
-                Toast.makeText(Login.this, "Failed to connect to server, check internet connection", Toast.LENGTH_SHORT).show();
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(Login.this, "Failed to connect to server, check internet connection", Toast.LENGTH_SHORT).show();
+                        localPlugin.revokeLogin();
+                    }
+                });
             }
 
             @Override
@@ -87,6 +115,7 @@ public class Login extends AppCompatActivity {
                     Login.this.runOnUiThread(new Runnable() {
                         public void run() {
                             Toast.makeText(Login.this, "Server responded unexpectedly", Toast.LENGTH_SHORT).show();
+                            localPlugin.revokeLogin();
                         }
                     });
                     throw new IOException("Unexpected code " + response);
@@ -96,7 +125,7 @@ public class Login extends AppCompatActivity {
 
 
                     //TODO: Remove this
-                    Log.d("Account", result);
+                    //Log.d("Account", result);
 
                     try {
                         JSONObject account = new JSONObject(result);
@@ -105,13 +134,18 @@ public class Login extends AppCompatActivity {
 
                             //final JSONObject AccountInfo = account.getJSONObject("AccountInfo");
 
+                            //TODO: Check if user wants to save login
+                            localPlugin.saveLogin(username, password);
+
                             Intent myIntent = new Intent(Login.this, BalanceActivity.class);
                             myIntent.putExtra("JSON", result); //Optional parameters
                             Login.this.startActivity(myIntent);
+                            finish();
 
                         } else {
                             Login.this.runOnUiThread(new Runnable() {
                                 public void run() {
+                                    localPlugin.revokeLogin();
                                     Toast.makeText(Login.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -121,6 +155,7 @@ public class Login extends AppCompatActivity {
                         e.printStackTrace();
                         Login.this.runOnUiThread(new Runnable() {
                             public void run() {
+                                localPlugin.revokeLogin();
                                 Toast.makeText(Login.this, "Invalid response from server, check internet connection", Toast.LENGTH_SHORT).show();
                             }
                         });

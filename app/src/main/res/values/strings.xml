@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EZPassVA</string>
+    <string name="app_name">EZPass</string>
 
     <!-- Strings related to login -->
     <string name="LoginTitle">Virginia E-ZPass Login</string>
@@ -11,5 +11,8 @@
     <string name="BalanceTitle">Virginia E-ZPass Balance</string>
     <string name="AccountStatus">Account Status</string>
     <string name="AccountName">Account Name</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
